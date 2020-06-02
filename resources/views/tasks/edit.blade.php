@@ -14,12 +14,13 @@
     <div class="row">
         <div class="col-6">
             {!! Form::model($task, ['route' => ['tasks.update', $task->id], 'method' => 'put']) !!}
-    <div class="form-group">
+   
+                <div class="form-group">
                     {!! Form::label('status', 'status:') !!}
-                    {!! Form::text('title', null, ['class' => 'form-control']) !!}
+                    {!! Form::text('status', null, ['class' => 'form-control']) !!}
                 </div>
                 <div class="form-group">
-                    {!! Form::label('content', 'タスク:') !!}
+                    {!! Form::label('content', 'content:') !!}
                     {!! Form::text('content', null, ['class' => 'form-control']) !!}
                 </div>
 
