@@ -13,11 +13,18 @@ class TasksController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+   public function index()
     {
-        $tasks=Task::All();
+        $data = [];
+        if (\Auth::check()) { 
+           
+            $user = \Auth::user();
+            $tasks = $user->tasks;
+            return view('tasks.index', ['tasks' => $tasks]);
+        }
         
-        return view('tasks.index',['tasks'=>$tasks],);
+      
+        return view('welcome'); 
     }
 
     /**
@@ -45,11 +52,13 @@ class TasksController extends Controller
             'content' => 'required|max:255',
             'status' => 'required|max:10',
         ]);
-        $task=new Task;
-        $task->content=$request->content;
-        $task->status=$request->status;
+        
       
-        $task->save();
+       $request->user()->tasks()->create([
+            'content' => $request->content,
+            'status' => $request->status
+        ]);
+        
         
         return redirect('/');
     }
