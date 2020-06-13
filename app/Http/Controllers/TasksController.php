@@ -35,11 +35,14 @@ class TasksController extends Controller
     public function create()
     {
         $task=new Task;
-        if(\Auth::id() === $task->user_id){
         
+         
         return view('tasks.create',['task' => $task]);
-        }
-        return view('/');
+        
+    
+         
+        
+        
     }
 
     /**
@@ -55,13 +58,14 @@ class TasksController extends Controller
             'content' => 'required|max:255',
             'status' => 'required|max:10',
         ]);
-        if (\Auth::id() === $task->user_id) {
+       
+      
            
        $request->user()->tasks()->create([
             'content' => $request->content,
             'status' => $request->status
         ]);
-        }
+        
       
         
         
